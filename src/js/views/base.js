@@ -1,0 +1,23 @@
+export const elements = {
+  month: document.querySelector('.month'),
+  description: document.querySelector('.input-transaction__desc-val'),
+  amount: document.querySelector('.input-transaction__amount-val'),
+  type: document.querySelector('.type-selected'),
+  incBtn: document.querySelector('.input-transaction__inc-btn'),
+  expBtn: document.querySelector('.input-transaction__exp-btn'),
+  overlay: document.querySelector('.overlay'),
+  transactionsContainer: document.querySelector('.transactions-container__input-transaction'),
+  modalExitBtn: document.querySelector('.modal-exit__btn'),
+  modal: document.querySelector('.modal'),
+  mobileAddTransaction: document.querySelector('.mobile-add-transaction'),
+  typeBtns: document.querySelectorAll('.type-group button'),
+  addBtn: document.querySelector('.input-transaction__add-btn'),
+  removeBtn: document.querySelector('.transactions-list__remove'),
+  placeholder: document.querySelector('.transactions-list__placeholder'),
+  transactionsList: document.querySelector('.transactions-container__transactions-list'),
+  balanceText: document.querySelector('.balance__text'),
+  incomeText: document.querySelector('.inc-value'),
+  expenseText: document.querySelector('.exp-value'),
+  filter: document.querySelector('#type-filter'),
+  clearEntriesBtn: document.querySelector('.clear-entries')
+}

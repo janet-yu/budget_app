@@ -1,0 +1,659 @@
+$background-color: #F7F8F8;
+$primary-blue: #3860C7;
+$input-blue: #EAF2FF;
+$border-color: #CCD9EB;
+$inc-green: #81B97A;
+$exp-red: #D76464;
+
+$main-margin-bottom: 4em;
+$base-font-size: 1rem;
+
+$bp-small: 550px;
+$bp-sm-med: 825px;
+$bp-medium: 1000px;
+$bp-large: 1300px;
+$bp-xlarge: 1920px;
+
+$bp-medium-height: 1366px;
+
+/* ------------------- TABLE OF CONTENTS -------------------
+
+* body
+  + Header / header
+  + Main content / main
+  + Finances container (balance, income, expenses) / .finances-container
+    - Balance / .finances-container__balance
+    - Income & Expenses / .finances-container__inc-exp
+  + Transactions Container / .transactions-container
+    - Transaction Input / .transactions-container__input-transaction
+    - Transaction Description / .input-transaction__description
+    - Transaction Amount / .input-transaction__amount-val
+    - Transaction Add Button / .input-transaction__add-btn
+    - Transaction Entries / .transactions-container__transactions-list
+      - Entry / .transactions-container__entry
+
+------------------------------------------------------- */
+
+
+/* Mixins */
+@mixin mq-max-width_sm {
+  @media (max-width: #{$bp-small - 1}) {
+    @content;
+  }
+}
+@mixin mq-max-width_sm-med {
+  @media (max-width: #{$bp-sm-med - 1}) {
+    @content;
+  }
+}
+
+@mixin mq-max-width_med {
+  @media (max-width: #{$bp-medium - 1}) {
+    @content;
+  }
+}
+
+@mixin mq-small {
+  @media (min-width: #{$bp-small}) {
+    width: auto;
+    @content;
+  }
+}
+
+@mixin mq-sm-med {
+  @media (min-width: #{$bp-sm-med}) {
+    width: auto;
+    @content
+  }
+}
+
+@mixin mq-medium {
+  @media (min-width: #{$bp-medium}) {
+    width: auto;
+    @content;
+  }
+}
+
+@mixin mq-medium-height {
+  @media (min-width: #{$bp-medium}) and (min-height: #{$bp-medium-height}) {
+    width: auto;
+    @content;
+  }
+}
+
+@mixin mq-large {
+  @media (min-width: #{$bp-large}) {
+    width: auto;
+    @content
+  }
+}
+
+@mixin mq-xlarge {
+  @media (min-width: #{$bp-xlarge}) {
+    width: auto;
+    @content
+  }
+}
+
+@mixin vendor-prefix($name, $value) {
+  @each $vendor in ('-webkit-', '-moz-', '-ms-', '-o-', '') {
+    #{$vendor}#{$name}: #{$value};
+  }
+}
+
+@mixin em-input {
+  font-size: 1em;
+  padding: .9em;
+  @content
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: 16px;
+}
+
+body {
+  background-color: $background-color;
+  color: #60636B;
+  font-size: $base-font-size;
+  position: relative;
+  height: 100vh;
+
+  @include mq-max-width_sm-med {
+    font-size: $base-font-size * .85;
+  }
+
+  @include mq-medium-height {
+    font-size: $base-font-size * 1.3;
+  }
+  @include mq-xlarge {
+    font-size: $base-font-size * 1.4;
+  }
+}
+
+.overlay {
+  @include mq-max-width_sm-med {
+    position: fixed;
+    top:    0;
+    right:  0;
+    bottom: 0;
+    left:   0;
+    background-color: $primary-blue;
+    opacity: .5;
+  }
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: normal;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  font-size: 1em;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  font-size: 1em;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  font-size: 1em;
+}
+:-moz-placeholder { /* Firefox 18- */
+  font-size: 1em;
+}
+
+::placeholder {
+  color: #a6a6a6;
+}
+// ====== GLOBAL STYLES =====
+header {
+  background-image: url('../imgs/mtns.jpeg');
+  background-size: cover;
+  height: 12.5em;
+  position: relative;
+  z-index: -1;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top:    0;
+    bottom: 0;
+    right:  0;
+    left:   0;
+    background-color: #163B84;
+    opacity: .75;
+  }
+
+  @include mq-small {
+    height: 18em;
+    background-position: 0 -100px;
+  }
+}
+
+select {
+  background: none;
+  border: none;
+}
+
+button {
+  border: none;
+  background: none;
+  color: #FFF;
+  cursor: pointer;
+}
+
+input {
+  padding: .9em;
+  background-color: $input-blue;
+  border: 1px solid rgba(0,0,0,0);
+  width: 100%;
+  font-size: 1em;
+}
+
+label {
+  display: block;
+  margin-bottom: 3px;
+  color: #B3B3B3;
+}
+
+.month {
+  color: #FFF;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 1.5em;
+  font-family: 'Courier', sans-serif;
+  z-index: 1;
+  position: relative;
+}
+
+main {
+  margin: -80px auto 50px auto;
+  font-family: 'Rubik', sans-serif;
+  z-index: 1;
+  width: 90%;
+
+  @include mq-max-width_sm-med {
+    width: 95%;
+  }
+
+  @include mq-small {
+    margin: -7.5em 8% $main-margin-bottom 8%;
+  }
+
+  @include mq-sm-med {
+    margin: -7.5em 10% $main-margin-bottom 10%;
+  }
+  @include mq-medium {
+    margin: -8em 10% $main-margin-bottom 10%;
+  }
+
+  @include mq-large {
+    margin: -8em 20% $main-margin-bottom 20%;
+  }
+
+}
+
+.finances-container,
+.transactions-container {
+  box-shadow: 0 4px 5px rgba(0, 0, 0, .25);
+  background-color: #FFF;
+}
+
+/*===== FINANCES CONTAINER (BALANCE, INCOME, EXPENSES) =====*/
+
+.finances-container {
+  text-align: center;
+  border-bottom: 15px solid $primary-blue;
+  padding: 2em;
+
+  .finances-container__balance {
+    padding: 25px;
+    border-bottom: 3px solid lighten($primary-blue, 35%);
+
+    .balance__label {
+      font-size: 1.5em;
+      text-transform: uppercase;
+      color: #B7B7B7;
+      margin-bottom: 5px;
+    }
+
+    .balance__text {
+      font-size: 2.2em;
+    }
+
+    @include mq-small {
+      flex: 1;
+      padding: 0;
+      border-right: 3px solid lighten($primary-blue, 35%);
+      border-bottom: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+
+  .finances-container__inc-exp {
+    margin-top: 10px;
+
+    @include mq-small {
+      flex: 1;
+      margin: 0;
+      padding: 1em;
+    }
+
+    @include mq-sm-med {
+      padding: 1.875em 0;
+    }
+  }
+
+  @include mq-small {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    padding: 1em;
+    border-radius: 30px 30px 0 0;
+  }
+
+  .inc-exp__container {
+    width: 50%;
+    margin: 0 auto;
+    @include mq-max-width_med{
+      width: 70%;
+    }
+  }
+}
+
+
+.type-container {
+  padding: 5px;
+  @include mq-sm-med {
+    display: flex;
+  }
+}
+
+.type-label {
+  font-size: 1.313em;
+  color: #B7B7B7;
+}
+
+.type-income {
+  border-left: .8em solid $inc-green;
+}
+
+.type-expense {
+  border-left: .8em solid $exp-red;
+}
+
+.inc-value,
+.exp-value {
+  font-weight: bold;
+}
+
+.inc-value {
+  color: $inc-green;
+
+  @include mq-sm-med {
+    margin-left: 2em;
+  }
+}
+
+.exp-value {
+  color: $exp-red;
+  @include mq-sm-med {
+    margin-left: .9em;
+  }
+}
+
+
+.mobile-add-transaction {
+  margin: 25px auto;
+  padding: 10px 20px;
+  border-radius: 10px;
+  display: block;
+  background: linear-gradient(to bottom, #3B77CF, #3E64C6);
+  font-size: 17px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .25);
+  width: 80%;
+
+  @include mq-sm-med {
+    display: none;
+  }
+}
+
+/* ===== TRANSACTIONS CONTAINER (input, entries, filter) ===== */
+.l-input-group {
+  margin: 1em 0;
+  @include mq-sm-med {
+    margin: 0 5px;
+  }
+}
+
+.transactions-container {
+  padding: 1em;
+
+  @include mq-sm-med {
+    padding: 1.5em 3em;
+  }
+}
+
+.transactions-container__input-transaction {
+  // display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 350px;
+  background: #FFF;
+
+  @include mq-sm-med {
+    position: relative;
+    left: 0;
+    top: 0;
+    transform: none;
+    display: flex;
+    max-width: none;
+    border-bottom: 2px solid $border-color;
+    padding-bottom: 2em;
+  }
+}
+.input-transaction__input-header {
+  background-color: $primary-blue;
+  color: #FFF;
+  position: relative;
+
+  .modal-exit {
+    margin-left: auto;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 1.2em;
+  }
+
+}
+
+.modal-exit__btn {
+  display: inherit;
+}
+
+.input-transaction__input-header h2 {
+  padding: .8em;
+  background-color: $primary-blue;
+  color: #FFF;
+  position: relative;
+  text-align: center;
+  font-weight: bold;
+
+  @include mq-sm-med {
+    display: none;
+  }
+}
+
+.input-transaction__main  {
+  padding: 1em;
+
+  @include mq-sm-med {
+    display: flex;
+    width: 100%;
+  }
+}
+
+.input-transaction__type {
+  flex: .1;
+
+  button {
+    width: 50%;
+    padding: .84em;
+    border: 1px solid #BCD4E7;
+    font-weight: bold;
+  }
+
+  .input-transaction__inc-btn {
+    background-color: $inc-green;
+    font-size: 1em;
+  }
+
+  .type-group {
+    display: flex;
+  }
+
+}
+
+.input-transaction__inc-btn,
+.input-transaction__exp-btn {
+  background: linear-gradient(to bottom, #FFF 40%, #d4ebff 120%);
+  color: #71839F;
+  transition: all .3s ease;
+}
+
+.inc-selected {
+  background: $inc-green;
+  color: #FFF;
+}
+
+.exp-selected {
+  background: $exp-red;
+  color: #FFF
+}
+
+.input-transaction__description {
+  flex: .6;
+}
+
+.input-transaction__amount {
+  flex: .2;
+  position: relative;
+
+  input {
+    padding-left: 1.5em;
+  }
+
+  &::before {
+    content: '$';
+    top: 52%;
+    left: .5em;
+    position: absolute;
+  }
+}
+
+.input-transaction__add-btn {
+  margin: 0 auto;
+  display: block;
+  background: linear-gradient(to bottom, #3B77CF, #3E64C6);
+  width: 100px;
+  border-radius: 10px;
+
+  @include mq-sm-med {
+    border-radius: 0;
+  }
+
+  @include em-input {
+    flex: .1;
+    align-self: flex-end;
+    background-color: $primary-blue;
+    font-weight: bold;
+  }
+}
+
+.transactions-container__header {
+  h2 {
+    color: lighten($primary-blue, 10%);
+    font-weight: bold;
+    text-transform: uppercase;
+
+    @include mq-max-width_sm {
+      margin: 10px 0;
+    }
+  }
+  label {
+    display: inline;
+  }
+  select {
+    color: $primary-blue;
+  }
+
+  @include mq-small {
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-between;
+  }
+}
+
+.clear-entries {
+  color: #8f8f8f;
+  display: block;
+  margin: .3em .5em 0 auto;
+}
+
+.transactions-container__transactions-list {
+  min-height: 326px;
+}
+
+.transactions-list__placeholder {
+  text-align: center;
+
+  img {
+    @include mq-medium {
+      width: 35%;
+    }
+    @include mq-max-width_sm {
+      width: 80%;
+    }
+  }
+  h3 {
+    color: lighten($primary-blue, 15%);
+    font-weight: light;
+  }
+}
+
+.transactions-list__entry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.1em;
+  background-color: #FFF;
+  box-shadow: 0 4px 10px #ddd;
+  padding: 1em;
+  margin-top: 1em;
+}
+  .entry__type {
+    color: #aaa;
+  }
+  .transactions-list__amt {
+    h3 {
+      display: inline;;
+      margin-right: .2em;
+    }
+  }
+
+  .transactions-list__remove {
+    max-width: 1em;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: all .8s ease;
+    font-size: 1em;
+    background-color: #FFF;
+    border-radius: 20px;
+
+    i {
+      color: $exp-red;
+    }
+
+    @include mq-medium {
+      &:hover {
+        max-width: 8em;
+        width: auto;
+        background-color: $exp-red;
+        padding: .2em 1em;
+      }
+
+      &:hover i,
+      &:hover .remove__text {
+        color: #FFF;
+      }
+    }
+  }
+
+  .remove__text {
+    color: $exp-red;
+    display: none;
+
+    @include mq-medium {
+      display: inline;
+    }
+  }
+
+// State modifiers
+.hide {
+  display: none;
+}
+
+.error {
+  border: 1px solid red;
+}
