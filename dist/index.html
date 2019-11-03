@@ -6,6 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Heebo|Roboto&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
   <title>Budget Tracker</title>
 </head>
 <body>
@@ -42,7 +44,7 @@
         <div class="transactions-container__input-transaction">
           <div class="input-transaction__input-header">
             <h2>Add Transaction</h2>
-            <i class="fa fa-times modal-exit"></i>
+            <button class="modal-exit__btn"><i class="fa fa-times modal-exit"></i></button>
           </div>
           <div class="input-transaction__main">
             <div class="input-transaction__type l-input-group">
@@ -70,13 +72,18 @@
             <div class="transactions-container__filter">
               <label for="">Filter By: </label>
               <select name="type-filter" id="type-filter">
-                <option value="">Select Type</option>
-                <option value="inc">Income</option>
-                <option value="exp">Expense</option>
+                <option value="">View All</option>
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
               </select>
+              <button class="clear-entries">Clear All</button>
             </div>
           </div>
           <div class="transactions-container__transactions-list">
+            <div <div class="transactions-list__placeholder">
+              <img src="./imgs/notrans.svg" alt="">
+              <h3>No Transactions</h3>
+            </div>
             <!-- <div class="transactions-list__entry">
               <div class="transactions-container__desc">
                 <h3>Rent</h3>
@@ -94,5 +101,8 @@
         </div>
       </div>
     </main>
+    <footer>
+      <div>Keep your finances in check!</div>
+    </footer>
 <script type="text/javascript" src="js/bundle.js"></script></body>
 </html>
