@@ -1,15 +1,4 @@
 // Connects models and views
-// Need to connect transactions with transactionsview
-
-// TODO: 10/14/19 - 10/18/19
-// 1. Make the exit button function on the add trans modal : DONE
-// 2. Popup notifying user that entry has been added
-// 3. Cutoff at 2 decimal places (NOT WORKING FOR TRANSACTIONS!!) : FIXED
-// 4. Remove button needs to be more accurate : DONE
-// 5. Edit font-size for entries on smaller devices : FIXED
-// 6. Need a placeholder when there are no current entries DONE
-// 7. Fix income margin-left to em : DONE
-// 8. NEED TO IMPLEMENT CLEAR ALL BUTTON 10/24/19
 
 import { elements } from './views/base';
 import Transactions from './models/Transactions';

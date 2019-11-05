@@ -17,7 +17,8 @@ $bp-xlarge: 1920px;
 $bp-medium-height: 1366px;
 
 /* ------------------- TABLE OF CONTENTS -------------------
-
+* mixins
+* global styles
 * body
   + Header / header
   + Main content / main
@@ -41,6 +42,7 @@ $bp-medium-height: 1366px;
     @content;
   }
 }
+
 @mixin mq-max-width_sm-med {
   @media (max-width: #{$bp-sm-med - 1}) {
     @content;
@@ -95,12 +97,6 @@ $bp-medium-height: 1366px;
   }
 }
 
-@mixin vendor-prefix($name, $value) {
-  @each $vendor in ('-webkit-', '-moz-', '-ms-', '-o-', '') {
-    #{$vendor}#{$name}: #{$value};
-  }
-}
-
 @mixin em-input {
   font-size: 1em;
   padding: .9em;
@@ -117,12 +113,15 @@ $bp-medium-height: 1366px;
   font-size: 16px;
 }
 
+body, html {
+  height: 100%;
+  position: relative;
+}
+
 body {
   background-color: $background-color;
   color: #60636B;
   font-size: $base-font-size;
-  position: relative;
-  height: 100vh;
 
   @include mq-max-width_sm-med {
     font-size: $base-font-size * .85;
@@ -155,23 +154,10 @@ h4 {
   font-weight: normal;
 }
 
-::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  font-size: 1em;
-}
-::-moz-placeholder { /* Firefox 19+ */
-  font-size: 1em;
-}
-:-ms-input-placeholder { /* IE 10+ */
-  font-size: 1em;
-}
-:-moz-placeholder { /* Firefox 18- */
-  font-size: 1em;
-}
-
 ::placeholder {
   color: #a6a6a6;
 }
-// ====== GLOBAL STYLES =====
+
 header {
   background-image: url('../imgs/mtns.jpeg');
   background-size: cover;
@@ -234,7 +220,6 @@ label {
 
 main {
   margin: -80px auto 50px auto;
-  font-family: 'Rubik', sans-serif;
   z-index: 1;
   width: 90%;
 
@@ -263,6 +248,13 @@ main {
 .transactions-container {
   box-shadow: 0 4px 5px rgba(0, 0, 0, .25);
   background-color: #FFF;
+}
+
+.main-container {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 1.2em;
+  font-family: 'Rubik', sans-serif;
 }
 
 /*===== FINANCES CONTAINER (BALANCE, INCOME, EXPENSES) =====*/
@@ -328,7 +320,6 @@ main {
     }
   }
 }
-
 
 .type-container {
   padding: 5px;
@@ -403,7 +394,6 @@ main {
 }
 
 .transactions-container__input-transaction {
-  // display: none;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -586,6 +576,7 @@ main {
       width: 80%;
     }
   }
+
   h3 {
     color: lighten($primary-blue, 15%);
     font-weight: light;
@@ -648,6 +639,17 @@ main {
       display: inline;
     }
   }
+
+footer {
+  width: 100%;
+  font-size: .9em;
+  background-color: $primary-blue;
+  text-align: center;
+  color: #FFF;
+  padding: .6em;
+  position: absolute;
+  bottom: 0;
+}
 
 // State modifiers
 .hide {
