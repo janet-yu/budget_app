@@ -7,8 +7,7 @@ export const updateFinancesView = (balance, inc, exp) => {
    * @param {float} inc - float representing current income
    * @param {float} exp - float representing current expenses
    */
-   
-  console.log("inc: " + inc);
+
   elements.incomeText.innerHTML = `$${inc}`;
   elements.expenseText.innerHTML = `$${exp}`;
 

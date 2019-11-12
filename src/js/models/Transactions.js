@@ -10,7 +10,6 @@ export default class Transactions {
   addTransaction(id, type, desc, amt) {
     const typeLabel = type === '+' ? 'income' : 'expense';
     const transaction = { id, type: typeLabel, desc, amt };
-    console.log('adding');
     this.transactions.push(transaction);
 
     return transaction;

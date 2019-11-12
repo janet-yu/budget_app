@@ -38,24 +38,28 @@ $bp-medium-height: 1366px;
 
 /* Mixins */
 @mixin mq-max-width_sm {
+  // For screens smaller than 550px
   @media (max-width: #{$bp-small - 1}) {
     @content;
   }
 }
 
 @mixin mq-max-width_sm-med {
+  // For screens smaller than 825px
   @media (max-width: #{$bp-sm-med - 1}) {
     @content;
   }
 }
 
 @mixin mq-max-width_med {
+  // For screens smaller than 1000px
   @media (max-width: #{$bp-medium - 1}) {
     @content;
   }
 }
 
 @mixin mq-small {
+  // For screens larger than 550px
   @media (min-width: #{$bp-small}) {
     width: auto;
     @content;
@@ -128,10 +132,10 @@ body {
   }
 
   @include mq-medium-height {
-    font-size: $base-font-size * 1.3;
+    font-size: $base-font-size * 1.1;
   }
   @include mq-xlarge {
-    font-size: $base-font-size * 1.4;
+    font-size: $base-font-size * 1.2;
   }
 }
 

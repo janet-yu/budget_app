@@ -26,7 +26,6 @@ export const changeType = (e) => {
     e.target.classList.add('exp-selected', 'type-selected');
     elements.incBtn.classList.remove('inc-selected');
     elements.incBtn.classList.remove('type-selected');
-    console.log(elements.type);
   }
 }
 

@@ -103,7 +103,6 @@ const ctrlFinancesRemoval = (type, amt) => {
   const floatAmt = parseFloat(amt); // parseFloat bc amt is a string
 
   if (type === '+') {
-    console.log("removal: " + amt);
     state.income -= floatAmt;
     state.balance -= floatAmt;
   }
